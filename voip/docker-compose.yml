@@ -1,0 +1,11 @@
+services:
+  asterisk:
+    image: andrius/asterisk:latest # Image légère et robuste
+    container_name: supermarket-voip
+    network_mode: "host" # Crucial pour la VoIP (évite les galères de ports UDP/NAT)
+    volumes:
+      - ./config:/etc/asterisk # Pour garder la config sur Git
+      - ./sounds:/var/lib/asterisk/sounds # Tes messages vocaux personnalisés
+    restart: always
+    environment:
+      - STERISK_COMMAND_ARGS=-vvvvvc # Log détaillé pour débugger
