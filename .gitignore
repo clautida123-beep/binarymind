@@ -1,0 +1,4 @@
+# .gitignore
+*.log
+core.*
+.DS_Store

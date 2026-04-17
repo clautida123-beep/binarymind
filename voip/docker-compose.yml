@@ -9,3 +9,25 @@ services:
     restart: always
     environment:
       - STERISK_COMMAND_ARGS=-vvvvvc # Log détaillé pour débugger
+  # 2. Le Panneau de Contrôle (Portainer) - Très léger
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: devops-control
+    ports:
+      - "9443:9443"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/var/lib/portainer
+    restart: always
+
+  # 3. L'Inspecteur ARI (AriNG) - Interface Web légère pour l'API
+  aring:
+    image: hermsi/aring:latest
+    container_name: ari-inspector
+    ports:
+      - "8081:80" # Accessible sur http://localhost:8081
+    restart: always
+
+volumes:
+  portainer_data:
