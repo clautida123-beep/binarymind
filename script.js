@@ -69,52 +69,23 @@
       logistique: 'Logistique'
     };
 
-    /*
     setTimeout(() => {
       const overlay = document.getElementById('success');
       document.getElementById('success-title').textContent = `Bienvenue, ${labels[selectedRole]} !`;
       document.getElementById('success-sub').textContent = 'Chargement de votre espace téléphonie…';
-      
-      // On ajoute la classe "show" pour afficher l'écran de succès
       overlay.classList.add('show');
 
-      // 👉 AJOUT ICI : passer au dashboard après affichage
+      // 👇 AJOUTE CE NOUVEAU CHRONOMÈTRE JUSTE ICI 👇
       setTimeout(() => {
-        // CORRECTION ICI : On enlève bien "show" et pas "success" !
+        // 1. On cache l'écran de succès
         overlay.classList.remove('show');
         
-        // On affiche la deuxième interface
-        document.getElementById('app-screen').classList.add('active'); 
-      }, 2000); // temps d'affichage du success
-  
+        // 2. On cache la première interface de connexion pour faire de la place
+        document.querySelector('.page').style.display = 'none'; 
+        
+        // 3. On affiche la troisième interface (le dashboard)
+        document.getElementById('dashboard').style.display = 'block'; 
+      }, 3000); // 3000 millisecondes = 3 secondes d'attente
+      // 👆 FIN DE L'AJOUT 👆
     }, 800);
-    */
-
-    setTimeout(() => {
-      const overlay = document.getElementById('success');
-      const appScreen = document.getElementById('app-screen');
-      
-      // 1. On prépare et on affiche l'écran "Success"
-      document.getElementById('success-title').textContent = `Bienvenue, ${labels[selectedRole]} !`;
-      document.getElementById('success-sub').textContent = 'Chargement de votre espace téléphonie…';
-      overlay.classList.add('show');
-
-      // 2. On attend 2 secondes avant de changer
-      setTimeout(() => {
-          // On cache l'overlay "Success" en enlevant la classe qui le rend visible
-          overlay.classList.remove('show'); 
-          
-          // On pourrait aussi le cacher complètement pour être sûr
-          overlay.style.display = 'none'; 
-
-          // 3. On affiche l'interface "App-screen"
-          appScreen.classList.add('active');
-          
-          // Optionnel : on force l'affichage si ton CSS utilise display
-          appScreen.style.display = 'block'; 
-          
-        }, 2000); 
-
-    }, 800);
-    
   }

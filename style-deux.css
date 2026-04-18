@@ -21,10 +21,10 @@
 html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
 
 /* BG */
-.bg-scene { position: fixed; inset: 0; z-index: 0;
+.bg-scene2 { position: fixed; inset: 0; z-index: 0;
   background: radial-gradient(ellipse 70% 50% at 10% 0%, rgba(99,190,255,0.09) 0%, transparent 60%),
               radial-gradient(ellipse 50% 40% at 90% 90%, rgba(167,139,250,0.08) 0%, transparent 60%); }
-.grid-overlay { position: fixed; inset: 0; z-index: 0;
+.grid-overlay2 { position: fixed; inset: 0; z-index: 0;
   background-image: linear-gradient(rgba(99,190,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99,190,255,0.03) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 100%); }
@@ -44,7 +44,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 .sb-brand { display: flex; align-items: center; gap: 9px; padding: 0 1.2rem 1.4rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
 .sb-icon { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .sb-icon svg { width: 15px; height: 15px; }
-.sb-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--accent2)); background-clip: var(--text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.sb-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--accent2)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
 .sb-section { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted2); padding: 0 1.2rem; margin: 0.8rem 0 0.4rem; }
 
@@ -100,7 +100,7 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
 .content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
 /* CARDS */
-.card {
+.card2 {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -109,8 +109,8 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(-
   animation: fadeUp 0.5s both;
 }
 .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
-.card-title { font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; display: flex; align-items: center; gap: 7px; }
-.card-title svg { width: 14px; height: 14px; color: var(--accent); }
+.card-title2 { font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; display: flex; align-items: center; gap: 7px; }
+.card-title2 svg { width: 14px; height: 14px; color: var(--accent); }
 
 /* ===== CLIMATE ===== */
 .clim-card { grid-column: 1; animation-delay: 0.05s; }
@@ -214,7 +214,7 @@ input[type=range].temp-range {
 
 /* ===== FLOATING CALL BUTTON ===== */
 .call-fab {
-  position: fixed; bottom: 24px; left: calc(var(--sidebar-w) + 16px);
+  position: fixed; bottom: 24px; right: calc(var(--sidebar-w) + 16px);
   width: 50px; height: 50px; border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   border: none; cursor: pointer; z-index: 200;
@@ -228,7 +228,7 @@ input[type=range].temp-range {
 
 /* CALL PANEL */
 .call-panel {
-  position: fixed; bottom: 84px; left: calc(var(--sidebar-w) + 16px);
+  position: fixed; bottom: 84px; right: calc(var(--sidebar-w) + 16px);
   width: 290px;
   background: rgba(10,18,36,0.97);
   border: 1px solid var(--border);

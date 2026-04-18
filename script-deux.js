@@ -1,4 +1,5 @@
 // ===== CLOCK =====
+
 function updateClock() {
   const now = new Date();
   const t = now.toLocaleTimeString('fr-FR');
