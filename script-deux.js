@@ -235,7 +235,7 @@ function confirmLogout() {
   document.getElementById('dashboard').style.display = 'none';
   
   // On réaffiche la page de connexion (Interface 1)
-  document.querySelector('.page').style.display = 'block';
+  document.querySelector('.page').style.display = 'flex';
   
   // On remet le bouton de connexion à zéro au cas où
   const btn = document.getElementById('btn');
