@@ -11,6 +11,7 @@
 <body>
 
   <!--- Affichage de page -->
+  
 <div class="bg-scene"></div>
 <div class="grid-overlay"></div>
 <div class="orb orb-1"></div>
@@ -107,8 +108,8 @@
 </div> 
 
 <!--Dashboard-->
-<div id="dashboard">
-  <div class="bg-scene2"></div>
+<div id="dashboard" style="display: none;">
+<div class="bg-scene2"></div>
 <div class="grid-overlay2"></div>
 
 <div class="app">
@@ -156,9 +157,21 @@
           <div class="sb-role" id="sb-role">En ligne</div>
         </div>
       </div>
-      <button class="sb-logout" onclick="window.location.href='login.html'">← Déconnexion</button>
+      <button class="sb-logout" onclick="openLogoutModal()">← Déconnexion</button>
     </div>
   </aside>
+
+  <!--Logout-->
+  <div id="logout-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h3>Déconnexion</h3>
+      <p>Voulez-vous vraiment quitter votre espace ?</p>
+      <div class="modal-btns">
+        <button onclick="closeLogoutModal()" class="btn-cancel">Non, rester</button>
+        <button onclick="confirmLogout()" class="btn-confirm">Oui, sortir</button>
+      </div>
+    </div>
+  </div>
 
   <!-- MAIN -->
   <div class="main">

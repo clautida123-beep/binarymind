@@ -211,3 +211,36 @@ function renderHistory() {
     list.appendChild(div);
   });
 }
+
+// Logout
+
+// ===== DÉCONNEXION =====
+
+// 1. Ouvre la fenêtre quand on clique sur le bouton de la sidebar
+function openLogoutModal() {
+  document.getElementById('logout-modal').classList.add('show');
+}
+
+// 2. Ferme la fenêtre si l'utilisateur clique sur "Non"
+function closeLogoutModal() {
+  document.getElementById('logout-modal').classList.remove('show');
+}
+
+// 3. Déconnecte pour de vrai si l'utilisateur clique sur "Oui"
+function confirmLogout() {
+  // On cache la fenêtre de confirmation
+  document.getElementById('logout-modal').classList.remove('show');
+  
+  // On cache le dashboard (Interface 3)
+  document.getElementById('dashboard').style.display = 'none';
+  
+  // On réaffiche la page de connexion (Interface 1)
+  document.querySelector('.page').style.display = 'block';
+  
+  // On remet le bouton de connexion à zéro au cas où
+  const btn = document.getElementById('btn');
+  if(btn) {
+      btn.disabled = false;
+      btn.textContent = 'Se connecter';
+  }
+}
