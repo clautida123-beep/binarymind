@@ -243,4 +243,25 @@ function confirmLogout() {
       btn.disabled = false;
       btn.textContent = 'Se connecter';
   }
+
+  // 1. Vider le mot de passe
+const passwordInput = document.getElementById('pw'); // Vérifie bien que ton id est 'password'
+if(passwordInput) {
+    passwordInput.value = '';
+}
+
+// 3. ON DECOCHE TOUS LES ROLES
+// On va chercher tous les boutons qui ont la classe "role-btn"
+const allRoles = document.querySelectorAll('.role-btn');
+
+allRoles.forEach(roles => {
+    // On retire la classe qui les rend "cochés"
+    // Vérifie dans ton CSS si c'est 'active' ou 'selected'
+    roles.classList.remove('active'); 
+    roles.classList.remove('selected'); 
+});
+
+// 4. On remet la variable du rôle choisi à vide
+// (C'est la variable que tu utilises sûrement pour valider la connexion)
+currentRole = null;
 }
