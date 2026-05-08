@@ -267,11 +267,9 @@ input[type=range].temp-range {
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 20px rgba(99,190,255,0.35);
   transition: transform 0.2s, box-shadow 0.2s;
-}
-
-#dashboard .call-fab {
   position: fixed;
 }
+
 
 .call-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(99,190,255,0.45); }
 .call-fab.open { background: linear-gradient(135deg, var(--error), #c2185b); box-shadow: 0 4px 20px rgba(255,107,138,0.35); }
@@ -291,11 +289,10 @@ input[type=range].temp-range {
   opacity: 0; pointer-events: none;
   transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
   box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-}
-
-#dashboard .call-panel {
   position: fixed;
 }
+
+
 .call-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
 
 .cp-tabs { display: flex; border-bottom: 1px solid var(--border); }

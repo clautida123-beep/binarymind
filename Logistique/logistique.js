@@ -274,3 +274,26 @@ function renderHistory() {
     list.appendChild(div);
   });
 }
+function confirmLogout() {
+  document.getElementById('logout-modal').classList.remove('show');
+  window.location.href = '../Caissier/main.html';
+}
+// Logout
+
+// ===== DÉCONNEXION =====
+
+// 1. Ouvre la fenêtre quand on clique sur le bouton de la sidebar
+function openLogoutModal() {
+  document.getElementById('logout-modal').classList.add('show');
+}
+
+// 2. Ferme la fenêtre si l'utilisateur clique sur "Non"
+function closeLogoutModal() {
+  document.getElementById('logout-modal').classList.remove('show');
+}
+
+// 3. Déconnecte pour de vrai si l'utilisateur clique sur "Oui"
+function confirmLogout() {
+  document.getElementById('logout-modal').classList.remove('show');
+  window.location.href = '../Caissier/main.html';
+}

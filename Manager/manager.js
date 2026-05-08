@@ -2,37 +2,105 @@
 function tick(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('fr-FR');}
 setInterval(tick,1000);tick();
 
-// 1. Ouvre la fenêtre quand on clique sur le bouton de la sidebar
-function openLogoutModal() {
-  document.getElementById('logout-modal').classList.add('show');
+/* Camera timers */
+const camTimers=[0,0,0,0];
+const camPaused=[false,false,false,false];
+setInterval(()=>{
+  for(let i=0;i<4;i++){
+    if(!camPaused[i]){
+      camTimers[i]++;
+      const h=String(Math.floor(camTimers[i]/3600)).padStart(2,'0');
+      const m=String(Math.floor((camTimers[i]%3600)/60)).padStart(2,'0');
+      const s=String(camTimers[i]%60).padStart(2,'0');
+      document.getElementById('ctim'+i).textContent=h+':'+m+':'+s;
+    }
+  }
+},1000);
+
+/* Camera select */
+let selCam=0;
+function selectCam(i){
+  document.querySelectorAll('.cam-cell').forEach((c,j)=>c.classList.toggle('selected',j===i));
+  selCam=i;
+  document.getElementById('sel-lbl').textContent=String(i+1).padStart(2,'0');
+  const isPaused=camPaused[i];
+  document.getElementById('pause-lbl').textContent=isPaused?'Reprendre':'Pause';
+  document.getElementById('pause-ico').style.display=isPaused?'none':'block';
+  document.getElementById('play-ico').style.display=isPaused?'block':'none';
+  document.getElementById('btn-pause').classList.toggle('active-btn',isPaused);
 }
 
-// 2. Ferme la fenêtre si l'utilisateur clique sur "Non"
-function closeLogoutModal() {
-  document.getElementById('logout-modal').classList.remove('show');
+/* Pause / Play */
+function togglePause(){
+  const i=selCam;
+  camPaused[i]=!camPaused[i];
+  const paused=camPaused[i];
+  document.getElementById('scan'+i).classList.toggle('paused',paused);
+  document.getElementById('pov'+i).classList.toggle('show',paused);
+  document.getElementById('rdot'+i).classList.toggle('paused',paused);
+  document.getElementById('rlbl'+i).textContent=paused?'PAUSE':'REC';
+  document.getElementById('pause-lbl').textContent=paused?'Reprendre':'Pause';
+  document.getElementById('pause-ico').style.display=paused?'none':'block';
+  document.getElementById('play-ico').style.display=paused?'block':'none';
+  document.getElementById('btn-pause').classList.toggle('active-btn',paused);
 }
 
-// 3. Déconnecte pour de vrai si l'utilisateur clique sur "Oui"
-function confirmLogout() {
-  // On cache la fenêtre de confirmation
-  document.getElementById('logout-modal').classList.remove('show');
+/* Replay */
+function replay(){
+  const flash=document.getElementById('replay-flash');
+  // If paused, resume first
+  if(camPaused[selCam]){
+    camPaused[selCam]=false;
+    document.getElementById('scan'+selCam).classList.remove('paused');
+    document.getElementById('pov'+selCam).classList.remove('show');
+    document.getElementById('rdot'+selCam).classList.remove('paused');
+    document.getElementById('rlbl'+selCam).textContent='REC';
+    document.getElementById('pause-lbl').textContent='Pause';
+    document.getElementById('pause-ico').style.display='block';
+    document.getElementById('play-ico').style.display='none';
+    document.getElementById('btn-pause').classList.remove('active-btn');
+  }
+  // Reset timer for selected cam
+  camTimers[selCam]=0;
+  flash.style.display='inline';
+  setTimeout(()=>{flash.style.display='none';},3000);
 }
 
+/* GPS toggle */
+let gpsOn=true;
+function toggleGPS(){
+  gpsOn=!gpsOn;
+  const tog=document.getElementById('gps-tog');
+  const badge=document.getElementById('gps-badge');
+  const off=document.getElementById('gps-off-screen');
+  tog.classList.toggle('on',gpsOn);
+  badge.textContent=gpsOn?'En ligne':'Hors ligne';
+  badge.className='gps-badge '+(gpsOn?'gps-on':'gps-off');
+  if(gpsOn){off.style.display='none';}
+  else{off.style.display='flex';off.style.opacity='1';off.style.pointerEvents='all';}
+}
 
-
-
-
-
-
-
-
-/* Animate bars on load */
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    document.querySelector('.bar-in').style.width='100%';
-    document.querySelector('.bar-out').style.width='25.7%';
-    document.querySelector('.bar-net').style.width='74.3%';
-  },200);
+/* Animate GPS dots */
+const dotData=[
+  {id:'dot-caissier',cx:65,cy:52,rx:20,ry:15},
+  {id:'dot-melscha',cx:200,cy:143,rx:18,ry:10},
+  {id:'dot-secu',cx:300,cy:143,rx:15,ry:12},
+  {id:'dot-compta',cx:185,cy:52,rx:22,ry:14},
+];
+dotData.forEach((d,i)=>{
+  let t=Math.random()*Math.PI*2;
+  setInterval(()=>{
+    if(!gpsOn)return;
+    t+=0.03;
+    const el=document.getElementById(d.id);
+    if(!el)return;
+    const nx=d.cx+Math.cos(t)*d.rx*0.3;
+    const ny=d.cy+Math.sin(t*1.3)*d.ry*0.3;
+    const circles=el.querySelectorAll('circle');
+    const texts=el.querySelectorAll('text');
+    circles.forEach(c=>{c.setAttribute('cx',nx);c.setAttribute('cy',ny);});
+    texts.forEach(txt=>{txt.setAttribute('x',nx);txt.setAttribute('y',ny-10);});
+  },200+i*70);
 });
 
 // ===== CALL PANEL =====
@@ -159,4 +227,27 @@ function renderHistory() {
     `;
     list.appendChild(div);
   });
+}
+function confirmLogout() {
+  document.getElementById('logout-modal').classList.remove('show');
+  window.location.href = '../Caissier/main.html';
+}
+// Logout
+
+// ===== DÉCONNEXION =====
+
+// 1. Ouvre la fenêtre quand on clique sur le bouton de la sidebar
+function openLogoutModal() {
+  document.getElementById('logout-modal').classList.add('show');
+}
+
+// 2. Ferme la fenêtre si l'utilisateur clique sur "Non"
+function closeLogoutModal() {
+  document.getElementById('logout-modal').classList.remove('show');
+}
+
+// 3. Déconnecte pour de vrai si l'utilisateur clique sur "Oui"
+function confirmLogout() {
+  document.getElementById('logout-modal').classList.remove('show');
+  window.location.href = '../Caissier/main.html';
 }

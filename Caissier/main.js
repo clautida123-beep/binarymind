@@ -77,15 +77,17 @@
 
       // 👇 AJOUTE CE NOUVEAU CHRONOMÈTRE JUSTE ICI 👇
       setTimeout(() => {
-        // 1. On cache l'écran de succès
-        overlay.classList.remove('show');
-        
-        // 2. On cache la première interface de connexion pour faire de la place
-        document.querySelector('.page').style.display = 'none'; 
-        
-        // 3. On affiche la troisième interface (le dashboard)
-        document.getElementById('dashboard').style.display = 'block'; 
-      }, 3000); // 3000 millisecondes = 3 secondes d'attente
-      // 👆 FIN DE L'AJOUT 👆
+  overlay.classList.remove('show');
+
+  const redirections = {
+    caissier:   'caissier.html',
+    comptable:  '../Comptable/comptable.html',
+    manager:    '../Manager/manager.html',
+    securite:   '../Sécurité/securite.html',
+    logistique: '../Logistique/logistique.html'
+  };
+
+  window.location.href = redirections[selectedRole];
+}, 3000);
     }, 800);
   }

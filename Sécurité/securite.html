@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SuperConnect — Sécurité</title>
+<link rel="icon" type="image/png" href="image/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/Sécurité/style-cinq.css">
+<link rel="stylesheet" href="/Sécurité/securite.css">
 </head>
 <body>
 <div class="bg"></div><div class="gr"></div>
@@ -32,9 +33,21 @@
         <div class="ur">Agent de sécurité</div>
       </div>
     </div>
-    <button class="lb">← Déconnexion</button>
+    <button class="sb-logout" onclick="openLogoutModal()">← Déconnexion</button>
   </div>
 </aside>
+
+<!--Logout-->
+  <div id="logout-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h3>Déconnexion</h3>
+      <p>Voulez-vous vraiment quitter votre espace ?</p>
+      <div class="modal-btns">
+        <button onclick="closeLogoutModal()" class="btn-cancel">Non, rester</button>
+        <button onclick="confirmLogout()" class="btn-confirm">Oui, sortir</button>
+      </div>
+    </div>
+  </div>
 
 <!-- MAIN -->
 <main class="main">
@@ -294,6 +307,6 @@
 </div>
 
 
-<script src="/Sécurité/script-cinq.js"></script>
+<script src="/Sécurité/securite.js"></script>
 </body>
 </html>
